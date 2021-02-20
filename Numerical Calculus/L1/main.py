@@ -1,7 +1,9 @@
+import datetime
 import math
-from random import random
+from random import random, randrange
 from random import seed
-from pregatire_input_tan import reducere_interval
+from pregatire_input_tan import reducere_interval, reducere_interval_MacLaurin
+from random import uniform
 
 
 # ex 1
@@ -102,7 +104,7 @@ def my_tan_1(x, epsilon=10 ** (-12)):
 
     D = 1 / D
     delta = C * D
-    f = delta * f;
+    f = delta * f
 
     # pentru urmatoarele iteratii avem
     # b va fi mereu +=2 (val impare)
@@ -110,7 +112,7 @@ def my_tan_1(x, epsilon=10 ** (-12)):
 
     a = -x ** 2
 
-    while math.fabs(delta-1) >= epsilon:
+    while math.fabs(delta - 1) >= epsilon:
         b += 2
         D = b + a * D
         if D == 0:
@@ -122,13 +124,49 @@ def my_tan_1(x, epsilon=10 ** (-12)):
 
         D = 1 / D
         delta = C * D
-        f = delta * f;
+        f = delta * f
 
-    return semn*f
+    return semn * f
+
+
+def my_tan_2(x):
+    c0, c1, c2, c3, c4 = 1, 1 / 3, 2 / 15, 17 / 315, 62 / 2835
+
+    exponent, semn, x = reducere_interval_MacLaurin(x)
+
+    x_3, x_5, x_7, x_9 = x ** 3, x ** 5, x ** 7, x ** 9
+
+    result = c0 * x + c1 * x_3 + c2 * x_5 + c3 * x_7 + c4 * x_9
+
+    return semn * (result ** exponent)
+
+
+def error_tan(fct, lista):
+    start_time = datetime.datetime.now()
+
+    mean_error = 0
+
+    for item in lista:
+        mean_error += math.fabs(math.tan(item) - fct(item))
+
+    end_time = datetime.datetime.now()
+
+    time_diff = (end_time - start_time)
+    execution_time = time_diff.total_seconds() * 1000
+
+    return mean_error / 10_000, execution_time
 
 
 def exercitiul_3():
-    pass
+    numbers = [uniform(-math.pi / 2, math.pi / 2) for i in range(10_000)]
+
+    f = open('results_tan.txt', 'w+')
+
+    result_my_tan_1, time_my_tan_1 = error_tan(my_tan_1, numbers)
+    result_my_tan_2, time_my_tan_2 = error_tan(my_tan_2, numbers)
+
+    f.write(f'Meth.continous fractions: {result_my_tan_1} with time: {time_my_tan_1}\n'
+            f'Meth. MacLaurin: {result_my_tan_2} with time: {time_my_tan_2}.')
 
 
 if __name__ == '__main__':
@@ -143,3 +181,6 @@ if __name__ == '__main__':
 
     print('Tan from math', math.tan(48))
     print('Tan1', my_tan_1(48))
+    print('Tan2', my_tan_2(48))
+
+    exercitiul_3()

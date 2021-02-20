@@ -20,3 +20,11 @@ def reducere_interval(x):
     semn, x = antisimetrie(x)
 
     return semn, x
+
+
+def reducere_interval_MacLaurin(x):
+    semn, x = reducere_interval(x)
+
+    x = math.pi/2 - x
+
+    return -1, semn, x
