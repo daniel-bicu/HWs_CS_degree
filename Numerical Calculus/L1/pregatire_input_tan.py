@@ -13,8 +13,10 @@ def antisimetrie(x):
 def periodicitate(x):
     return x % math.pi
 
+
 def reducere_interval(x):
     x = periodicitate(x)
 
-    return antisimetrie(x)
+    semn, x = antisimetrie(x)
 
+    return semn, x

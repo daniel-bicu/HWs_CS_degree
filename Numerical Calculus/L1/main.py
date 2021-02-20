@@ -77,17 +77,16 @@ CONST_MIC = 10 ** (-12)
 
 
 def my_tan_1(x, epsilon=10 ** (-12)):
-    x = reducere_interval(x)[1]
+    semn, x = reducere_interval(x)
 
     a = x
-    b0 = 0
-
-    f = b0
+    b = 0
+    f = b
 
     if f == 0:
-        f0 = CONST_MIC
+        f = CONST_MIC
 
-    C = b0
+    C = f
     D = 0
     b = 1
     # executam o iteratie inainte
@@ -95,9 +94,6 @@ def my_tan_1(x, epsilon=10 ** (-12)):
     D = b + a * D
     if D == 0:
         D = CONST_MIC
-
-    if C == 0:
-        C = CONST_MIC
 
     C = b + a / C
 
@@ -128,7 +124,7 @@ def my_tan_1(x, epsilon=10 ** (-12)):
         delta = C * D
         f = delta * f;
 
-    return f
+    return semn*f
 
 
 def exercitiul_3():
@@ -136,14 +132,14 @@ def exercitiul_3():
 
 
 if __name__ == '__main__':
-    precizia_masina = exercitiul_1()
-    print(precizia_masina)
-    # calculam u-ul
-
-    u = 10 ** (-precizia_masina)
-
-    print(exercitiul_2_adunare(1.0, u / 10, u / 10))
-    print(exercitiul_2_inmultire())
+    # precizia_masina = exercitiul_1()
+    # print(precizia_masina)
+    # # calculam u-ul
+    #
+    # u = 10 ** (-precizia_masina)
+    #
+    # print(exercitiul_2_adunare(1.0, u / 10, u / 10))
+    # print(exercitiul_2_inmultire())
 
     print('Tan from math', math.tan(45))
     print('Tan1', my_tan_1(45))
