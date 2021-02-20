@@ -108,9 +108,9 @@ def my_tan_1(x, epsilon=10 ** (-12)):
     # b va fi mereu +=2 (val impare)
     # a va fi mereu - x^2
 
-    a = - x ** 2
+    a = -x ** 2
 
-    while delta - 1 >= epsilon:
+    while math.fabs(delta-1) >= epsilon:
         b += 2
         D = b + a * D
         if D == 0:
@@ -141,5 +141,5 @@ if __name__ == '__main__':
     # print(exercitiul_2_adunare(1.0, u / 10, u / 10))
     # print(exercitiul_2_inmultire())
 
-    print('Tan from math', math.tan(45))
-    print('Tan1', my_tan_1(45))
+    print('Tan from math', math.tan(48))
+    print('Tan1', my_tan_1(48))
