@@ -2,6 +2,11 @@ import datetime
 import math
 from random import random, randrange
 from random import seed
+import matplotlib.pyplot as plt
+
+import matplotlib as matplotlib
+import numpy as np
+
 from pregatire_input_tan import reducere_interval, reducere_interval_MacLaurin
 from random import uniform
 
@@ -81,6 +86,12 @@ CONST_MIC = 10 ** (-12)
 def my_tan_1(x, epsilon=10 ** (-12)):
     semn, x = reducere_interval(x)
 
+    if x % (math.pi / 2) == 0:
+        if semn == -1:
+            return '-infinit'
+        else:
+            return '+infinit'
+
     a = x
     b = 0
     f = b
@@ -134,6 +145,12 @@ def my_tan_2(x):
 
     exponent, semn, x = reducere_interval_MacLaurin(x)
 
+    if x % (math.pi / 2) == 0:
+        if semn == -1:
+            return '-infinit'
+        else:
+            return '+infinit'
+
     x_3, x_5, x_7, x_9 = x ** 3, x ** 5, x ** 7, x ** 9
 
     result = c0 * x + c1 * x_3 + c2 * x_5 + c3 * x_7 + c4 * x_9
@@ -145,16 +162,24 @@ def error_tan(fct, lista):
     start_time = datetime.datetime.now()
 
     mean_error = 0
+    times = []
+    values = []
 
     for item in lista:
-        mean_error += math.fabs(math.tan(item) - fct(item))
+        value = math.fabs(math.tan(item) - fct(item))
+        mean_error += value
+
+        time_diff = (datetime.datetime.now() - start_time)
+        execution_time = time_diff.total_seconds() * 1000
+        times.append(execution_time)
+        values.append(value)
 
     end_time = datetime.datetime.now()
 
     time_diff = (end_time - start_time)
     execution_time = time_diff.total_seconds() * 1000
 
-    return mean_error / 10_000, execution_time
+    return mean_error / 10_000, execution_time, times, values
 
 
 def exercitiul_3():
@@ -162,12 +187,35 @@ def exercitiul_3():
 
     f = open('results_tan.txt', 'w+')
 
-    result_my_tan_1, time_my_tan_1 = error_tan(my_tan_1, numbers)
-    result_my_tan_2, time_my_tan_2 = error_tan(my_tan_2, numbers)
+    result_my_tan_1, time_my_tan_1, times_my_tan_1, values_my_tan_1 = error_tan(my_tan_1, numbers)
+    result_my_tan_2, time_my_tan_2, times_my_tan_2, values_my_tan_2 = error_tan(my_tan_2, numbers)
 
     f.write(f'Meth.continous fractions: {result_my_tan_1} with time: {time_my_tan_1}\n'
             f'Meth. MacLaurin: {result_my_tan_2} with time: {time_my_tan_2}.')
 
+    times_my_tan_1 = np.array(times_my_tan_1)
+    times_my_tan_1 = times_my_tan_1.reshape(100, 100).mean(axis=1)
+
+    values_my_tan_1 = np.array(values_my_tan_1)
+    values_my_tan_1 = values_my_tan_1.reshape(100, 100).mean(axis=1)
+
+    fig = plt.figure(figsize=(10,8))
+    plt.plot(times_my_tan_1, values_my_tan_1, 'o', ls='-', ms=4, markevery=0.1, color='lightblue', linewidth=1)
+    plt.xlabel('time')
+    plt.ylabel('error')
+    fig.savefig("tan_1.pdf", bbox_inches='tight')
+
+    times_my_tan_2 = np.array(times_my_tan_2)
+    times_my_tan_2 = times_my_tan_2.reshape(100, 100).mean(axis=1)
+
+    values_my_tan_2 = np.array(values_my_tan_2)
+    values_my_tan_2 = values_my_tan_2.reshape(100, 100).mean(axis=1)
+
+    fig = plt.figure(figsize=(10,8))
+    plt.plot(times_my_tan_2, values_my_tan_2, 'o', ls='-', ms=4, markevery=0.1, color='lightblue', linewidth=1)
+    plt.xlabel('time')
+    plt.ylabel('error')
+    fig.savefig("tan_2.pdf", bbox_inches='tight')
 
 if __name__ == '__main__':
     # precizia_masina = exercitiul_1()
