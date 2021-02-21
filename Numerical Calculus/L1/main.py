@@ -217,6 +217,13 @@ def exercitiul_3():
     plt.ylabel('error')
     fig.savefig("tan_2.pdf", bbox_inches='tight')
 
+    fig = plt.figure(figsize=(10, 8))
+    plt.plot(times_my_tan_1, values_my_tan_1, 'o', label='my_tan_1', ls='-', ms=4, markevery=0.1, color='blue', linewidth=1)
+    plt.plot(times_my_tan_2, values_my_tan_2, 'o', label='my_tan_2', ls='-', ms=4, markevery=0.1, color='red', linewidth=1)
+    plt.xlabel('time')
+    plt.ylabel('error')
+    fig.savefig("tan.pdf", bbox_inches='tight')
+
 if __name__ == '__main__':
     # precizia_masina = exercitiul_1()
     # print(precizia_masina)

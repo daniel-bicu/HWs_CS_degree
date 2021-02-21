@@ -1,2 +1,2 @@
-Meth.continous fractions: 1.2085121427565273e-12 with time: 69.58699999999999
-Meth. MacLaurin: 0.020328809610662427 with time: 35.391.
+Meth.continous fractions: 5.2729353244412636e-11 with time: 79.497
+Meth. MacLaurin: 0.019925756037178097 with time: 35.543.
