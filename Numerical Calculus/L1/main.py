@@ -199,7 +199,7 @@ def exercitiul_3():
     values_my_tan_1 = np.array(values_my_tan_1)
     values_my_tan_1 = values_my_tan_1.reshape(100, 100).mean(axis=1)
 
-    fig = plt.figure(figsize=(10,8))
+    fig = plt.figure(figsize=(10, 8))
     plt.plot(times_my_tan_1, values_my_tan_1, 'o', ls='-', ms=4, markevery=0.1, color='lightblue', linewidth=1)
     plt.xlabel('time')
     plt.ylabel('error')
@@ -211,11 +211,12 @@ def exercitiul_3():
     values_my_tan_2 = np.array(values_my_tan_2)
     values_my_tan_2 = values_my_tan_2.reshape(100, 100).mean(axis=1)
 
-    fig = plt.figure(figsize=(10,8))
+    fig = plt.figure(figsize=(10, 8))
     plt.plot(times_my_tan_2, values_my_tan_2, 'o', ls='-', ms=4, markevery=0.1, color='lightblue', linewidth=1)
     plt.xlabel('time')
     plt.ylabel('error')
     fig.savefig("tan_2.pdf", bbox_inches='tight')
+
 
 if __name__ == '__main__':
     # precizia_masina = exercitiul_1()
