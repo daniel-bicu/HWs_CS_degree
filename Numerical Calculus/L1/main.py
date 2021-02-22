@@ -217,19 +217,28 @@ def exercitiul_3():
     plt.ylabel('error')
     fig.savefig("tan_2.pdf", bbox_inches='tight')
 
+    fig = plt.figure(figsize=(10, 8))
+    plt.plot(times_my_tan_1, values_my_tan_1, 'o', label='my_tan_1', ls='-', ms=4, markevery=0.1, color='blue',
+             linewidth=1)
+    plt.plot(times_my_tan_2, values_my_tan_2, 'o', label='my_tan_2', ls='-', ms=4, markevery=0.1, color='red',
+             linewidth=1)
+    plt.xlabel('time')
+    plt.ylabel('error')
+    fig.savefig("tan.pdf", bbox_inches='tight')
+
 
 if __name__ == '__main__':
-    # precizia_masina = exercitiul_1()
-    # print(precizia_masina)
-    # # calculam u-ul
-    #
-    # u = 10 ** (-precizia_masina)
-    #
-    # print(exercitiul_2_adunare(1.0, u / 10, u / 10))
-    # print(exercitiul_2_inmultire())
+    precizia_masina = exercitiul_1()
+    print('Precizia masina', precizia_masina)
+    # calculam u-ul
 
-    print('Tan from math', math.tan(48))
-    print('Tan1', my_tan_1(48))
-    print('Tan2', my_tan_2(48))
+    u = 10 ** (-precizia_masina)
+
+    print('Este adunarea asociativa? ', exercitiul_2_adunare(1.0, u / 10, u / 10))
+    print('3 Numere pentru care inmultirea nu este asociativa: ', exercitiul_2_inmultire())
+
+    print('Tan  - din biblioteca de matematica: ', math.tan(48))
+    print('Tan1 - meth. fractiilor continue: ', my_tan_1(48))
+    print('Tan2 - meth. polinoamelor: ', my_tan_2(48))
 
     exercitiul_3()
