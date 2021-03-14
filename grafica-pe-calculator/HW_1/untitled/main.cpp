@@ -185,17 +185,17 @@ void Display8_1() {
 void Display8() {
     // trasare poligon convex GL_QUADS : (v0,v1,v2, ..., v_{n-1})
     glColor3f(0,0,1); // albastru
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glPolygonMode(GL_FRONT, GL_FILL);
     glBegin(GL_POLYGON);
 
     // de completat ...
 
-    glVertex2f(-0.4, 0.8);
+    glVertex2f(-0.4, 0.7);
     glVertex2f(-0.8,0);
-    glVertex2f(-0.4, -0.8);
-    glVertex2f(0.4, -0.8);
+    glVertex2f(-0.4, -0.7);
+    glVertex2f(0.4, -0.7);
     glVertex2f(0.8,0);
-    glVertex2f(0.4, 0.8);
+    glVertex2f(0.4, 0.7);
 
     glEnd();
 
@@ -203,12 +203,12 @@ void Display8() {
     glColor3f(1,0,0); // rosu
     glBegin(GL_POLYGON);
 
-    glVertex2f(-0.25, 0.58);
+    glVertex2f(-0.28, 0.5);
     glVertex2f(-0.58,0);
-    glVertex2f(-0.25, -0.58);
-    glVertex2f(0.25, -0.58);
+    glVertex2f(-0.28, -0.5);
+    glVertex2f(0.28, -0.5);
     glVertex2f(0.58,0);
-    glVertex2f(0.25, 0.58);
+    glVertex2f(0.28, 0.5);
 
     glEnd();
 
@@ -217,12 +217,12 @@ void Display8() {
     glBegin(GL_POLYGON);
 
 
-    glVertex2f(-0.24, 0.57);
-    glVertex2f(-0.57,0);
-    glVertex2f(-0.24, -0.57);
-    glVertex2f(0.24, -0.57);
-    glVertex2f(0.57,0);
-    glVertex2f(0.24, 0.57);
+    glVertex2f(-0.26, 0.48);
+    glVertex2f(-0.56,0);
+    glVertex2f(-0.26, -0.48);
+    glVertex2f(0.26, -0.48);
+    glVertex2f(0.56,0);
+    glVertex2f(0.26, 0.48);
 
     glEnd();
 
